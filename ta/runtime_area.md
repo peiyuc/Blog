@@ -37,7 +37,7 @@ struct threadQueue {
 kvm启动时就会建立一个java heap，并且有所有thread共享这块内存。kvm中heap包含两个部分：permanent space和heap space。所有和类相关的元数据都会存储在permanent space中，而新建的instance都存储在heap space中。
 
 由于heap space中的对象会被gc回收掉，而permanent space中的元数据不会被gc回收。所以kvm在新加一个class到内存中的时候，kvm会动态改变permanent space的大小，又由于permanent space和heap space共用heap内存，所以heap space的空间也会改变。
-![heap space](./pics/heap.png)
+![heap space](/pics/heap.png)
 
 （尼玛，图片不能缩小吗？）
 
