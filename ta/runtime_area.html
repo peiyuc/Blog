@@ -1042,7 +1042,7 @@ todo: 补一张内存结构图</p>
 <h3 id="java-heap"><a name="user-content-java-heap" href="#java-heap" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java heap</h3>
 <p>kvm启动时就会建立一个java heap，并且有所有thread共享这块内存。kvm中heap包含两个部分：permanent space和heap space。所有和类相关的元数据都会存储在permanent space中，而新建的instance都存储在heap space中。</p>
 <p>由于heap space中的对象会被gc回收掉，而permanent space中的元数据不会被gc回收。所以kvm在新加一个class到内存中的时候，kvm会动态改变permanent space的大小，又由于permanent space和heap space共用heap内存，所以heap space的空间也会改变。<br />
-<img alt="heap space" src="pics/heap.png" /></p>
+<img alt="heap space" src="/Users/peiyuc/Blog/pics/heap.png" /></p>
 <p>（尼玛，图片不能缩小吗？）</p>
 <p>hotspot中的heap空间是可以通过设置jvm内存的参数动态改变的，但是kvm是在初始化完成之后就不能改变了。如果遇到内存不足的情况就会跑出一个OOM的异常。</p>
 <h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>运行期常量池</h3>
