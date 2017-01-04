@@ -106,6 +106,7 @@ Exception in thread "main" java.io.InvalidClassException: seri.Person; local cla
   at java.lang.reflect.Method.invoke(Method.java:497)
   at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
 ```
+
 * 可以不声明serialVersionUID常量，但是会留坑，因为jvm会根据class信息生成一个serialVersionUID，如果class发生变更会导致serialVersionUID不一致导致，反序列化失败
 * serialVersionUID必须是常量，也就是static和final的，否则就认为没有设置serialVersionUID，代码如下：
 
@@ -123,6 +124,7 @@ private static Long getDeclaredSUID(Class<?> cl) {
         return null;
     }
 ```
+
 * serialVersionUID需要声明为private
 * jvm计算serialVersionUID方法，可以查看ObejctStreamClass#computeDefaultSUID方法
 * 子类和父类都需要实现Serializable接口，如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常

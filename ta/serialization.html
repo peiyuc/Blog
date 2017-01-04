@@ -1100,7 +1100,7 @@ if (obj instanceof String) {
 <li>不会序列化static和transient属性</li>
 <li>如果序列化的serialVersionUID与反序列化的serialVersionUID不一致会抛如下异常：</li>
 </ul>
-<p><pre><code>Exception in thread &quot;main&quot; java.io.InvalidClassException: seri.Person; local class incompatible: stream classdesc serialVersionUID = 1, local class serialVersionUID = 2
+<pre><code>Exception in thread &quot;main&quot; java.io.InvalidClassException: seri.Person; local class incompatible: stream classdesc serialVersionUID = 1, local class serialVersionUID = 2
   at java.io.ObjectStreamClass.initNonProxy(ObjectStreamClass.java:616)
   at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1623)
   at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1518)
@@ -1113,10 +1113,13 @@ if (obj instanceof String) {
   at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
   at java.lang.reflect.Method.invoke(Method.java:497)
   at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
-</code></pre><br />
-<em> 可以不声明serialVersionUID常量，但是会留坑，因为jvm会根据class信息生成一个serialVersionUID，如果class发生变更会导致serialVersionUID不一致导致，反序列化失败<br />
-</em> serialVersionUID必须是常量，也就是static和final的，否则就认为没有设置serialVersionUID，代码如下：</p>
-<p><pre><code>private static Long getDeclaredSUID(Class&lt;?&gt; cl) {
+</code></pre>
+
+<ul>
+<li>可以不声明serialVersionUID常量，但是会留坑，因为jvm会根据class信息生成一个serialVersionUID，如果class发生变更会导致serialVersionUID不一致导致，反序列化失败</li>
+<li>serialVersionUID必须是常量，也就是static和final的，否则就认为没有设置serialVersionUID，代码如下：</li>
+</ul>
+<pre><code>private static Long getDeclaredSUID(Class&lt;?&gt; cl) {
         try {
             Field f = cl.getDeclaredField(&quot;serialVersionUID&quot;);
             int mask = Modifier.STATIC | Modifier.FINAL;
@@ -1128,9 +1131,12 @@ if (obj instanceof String) {
         }
         return null;
     }
-</code></pre><br />
-<em> serialVersionUID需要声明为private<br />
-</em> jvm计算serialVersionUID方法，可以查看ObejctStreamClass#computeDefaultSUID方法<br />
-<em> 子类和父类都需要实现Serializable接口，如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常<br />
-</em> 类的所有class属性都必须实现Serializable接口<br />
-* 可以通过override writeObject()和readObject()方法自定义序列化的方法</p></article></body></html>
+</code></pre>
+
+<ul>
+<li>serialVersionUID需要声明为private</li>
+<li>jvm计算serialVersionUID方法，可以查看ObejctStreamClass#computeDefaultSUID方法</li>
+<li>子类和父类都需要实现Serializable接口，如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常</li>
+<li>类的所有class属性都必须实现Serializable接口</li>
+<li>可以通过override writeObject()和readObject()方法自定义序列化的方法</li>
+</ul></article></body></html>
