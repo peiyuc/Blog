@@ -1014,9 +1014,14 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>index</title></head><body><article class="markdown-body"><h1 id="peiyuc"><a name="user-content-peiyuc" href="#peiyuc" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>欢迎来到peiyuc的博客</h1>
-<ul>
-<li><a href="http://xuyaoyao.me/ta/preface.html">kvm系列之一：前言</a></li>
-<li><a href="http://xuyaoyao.me/ta/class_instance.html">kvm系列之二：class和instance</a></li>
-<li><a href="http://xuyaoyao.me/ta/runtime_area.html">kvm系列之三：运行时的数据结构</a></li>
-</ul></article></body></html>
+</style><title>preface</title></head><body><article class="markdown-body"><h3 id="kvm"><a name="user-content-kvm" href="#kvm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>kvm系列之一：前言</h3>
+<p>peiyuc at 2016-10-20</p>
+<hr />
+<p>kvm是什么？去google出来的大部分结果并不是我们想要的，可见这个东西在现在并不是很流行，研究或使用他的人也不多。那我为什么要学习这个呢？从R大一篇博客里看到的从表到里学习JVM实现，有推荐深入嵌入式Java虚拟机这本书，推荐的原因也很简单：结构简单，适合入门阅读。看了一下书的年代，有点久远03年出版的，不过还是尝试去淘宝上的书店问了一下，基本上都只有影印版，之前买过一本影印版的发现质量太差，所以还是尝试去买正版的，问了好多家终于有一家有，立即拍下来36软妹币，真心不贵。过几天拿到书，发现书不厚，大喜啊，可以去哪都拿着。随便翻了一下目录跳过了前两章，直接看第三章，觉得是我想要的，哈哈。<br />
+说了这么多还没说kvm是什么，kvm全称Kilobyte Virtual Machine，是Sun Microsystems所编写的一套Java虚拟机，属于Sun的J2ME这一个Java版本的一部分。kvm是运行在嵌入式设备上的，由于嵌入式设备的存储空间和计算性能的限制，相较于hotspot结构更加简单，学习起来也相对容易，同时kvm也实现了jvm规范，因此选择从kvm出发，循序渐进的学习jvm相关知识。</p>
+<p>书中对常见的jvm中基本的运行机制都做了代码层级的介绍，并做了简要的批注，个人感觉作用还是很大的。之前我们看各种java类的书籍，很多知识只是从语法层面给一个介绍，并不告诉你为什么，比如Interface的方法只能是public、abstract的，方法的入参个数不能超过255个，this关键字是怎么回事等等。看了书之后就能理解这些语法底层是如何实现的，让自己对java有一个更深层次的理解。虽然kvm的结构比较简单，但是和hotspot的最基本原理还是相通的，只是有些功能做的简单一些比如gc工具。自己也买了一本HotSpot实战，读起来就没那么顺畅，所以先从简单的jvm入手，好好研究，真正弄明白了再去研究HostSpot。</p>
+<p>这本书现在读到了gc那一章，读完这一章基本上这本书就算全读完了，所以是时候对这本书进行总结的时候。后面一段时间会陆续更新kvm系列文章。最后贴一句《劝学》里的话跟大家共勉：</p>
+<blockquote>
+<p>蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。蟹六跪而二螯，非蛇鳝之穴无可寄托者，用心躁也。</p>
+</blockquote>
+<p>读书最重要的是“用心一也”，最忌讳“用心躁也”，这个道理恐怕大家都知道，但是真正做的时候却很难，这时候该读读曾国藩的书，看大师是如何劝学的。也希望自己在研究jvm的道路上可以十年如一日，实现自己的目标。</p></article></body></html>
