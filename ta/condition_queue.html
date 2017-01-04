@@ -1021,7 +1021,7 @@ body .markdown-body
 <blockquote>
 <p>A condition queue gets its name because it gives a group of threads-called the wait set-a way to wait for a specific condition to become true. Unlike typical queues in which the elements are data items, the elements of condition queue are the threads waiting for condition.</p>
 </blockquote>
-<p>这是java并发编程实战里的解释，wait set是什么？感觉没怎么说清楚。另一种解释是说条件队列可以协同不同线程之间的工作（太抽象）。条件队列的定义暂且放下，先了解一下如何使用。</p>
+<p>这是<a href="https://book.douban.com/subject/10484692/">java并发编程实战</a>里的解释，wait set是什么？感觉没怎么说清楚。另一种解释是说条件队列可以协同不同线程之间的工作（太抽象）。条件队列的定义暂且放下，先了解一下如何使用。</p>
 <h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>条件队列的使用</h3>
 <p>直接看下条件队列相关的api，Object中的wait(),notify(),notifyAll()三个方法，大家应该很熟悉，如何使用呢？打开javadoc<br />
 <pre><code>synchronized (obj) {
