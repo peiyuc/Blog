@@ -147,7 +147,9 @@ public abstract class Enum<E extends Enum<E>>
 
 ### 实战：ArrayList的实现
 ArrayList是实现了Serializable接口的，因此可以序列化，但是elementData属性是transient修饰的，根据上一节的说明，该字段不会被序列化，但是我们知道elementData是用来存放组数里的数据的，这个字段不进行序列化就应该有问题，同看查看ArrayList的结构，我们可以看到该类实现了writeObject()和readObject()方法，奥秘就在这两个方法里。
+
 有上面的分析可以知道通过实现writeObject()和readObject()方法，我们可以自定义序列化和反序列化的规则，ArrayList是怎么实现的呢？为什么要进行自定义的序列化和反序列化？
+
 因为ArrayList是基于数组实现的，而且该数组是有冗余的，当容量达到threshold时会进行扩容，所有ArrayList数组里有部分内容是null，在序列化时不需要保存这部分数据，因此ArrayList自定义实现了writeObject()和readObject()方法，只保存非null的数据。
 
 ### 源码分析
