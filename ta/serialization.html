@@ -1015,8 +1015,14 @@ body .markdown-body
   }
 }
 </style><title>serialization</title></head><body><article class="markdown-body"><h3 id="java-serialization"><a name="user-content-java-serialization" href="#java-serialization" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java serialization</h3>
-<p>peiyuc 2017-01-04</p>
+<p>peiyuc 2017-01-04 happy new year!</p>
 <hr />
+<p>序列化是一种约定，大约有两种类型：</p>
+<ul>
+<li>文本型：xml, json等</li>
+<li>字节型：java序列化机制</li>
+</ul>
+<p>本文重点讲解java的序列化机制</p>
 <h3 id="serialization"><a name="user-content-serialization" href="#serialization" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>serialization的使用</h3>
 <p>本节介绍如何使用java原生的序列化工具，代码如下：</p>
 <p><pre><code>public class Person implements Serializable {
@@ -1059,7 +1065,7 @@ body .markdown-body
 
 }
 </code></pre><br />
-main函数有具体的使用方法，就不详细讲解了。</p>
+main函数有具体的使用方法，通过ObjectOutputStream和ObjectInputStream就可以实现序列化和反序列化，使用方法也比较简单，就不详细讲解了。</p>
 <h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>注意事项</h3>
 <ul>
 <li>必须实现Serializable接口，否则会抛如下异常</li>

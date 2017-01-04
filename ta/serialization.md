@@ -1,7 +1,13 @@
 ### java serialization
-peiyuc 2017-01-04
+peiyuc 2017-01-04 happy new year!
 
 ------
+序列化是一种约定，大约有两种类型：
+
+* 文本型：xml, json等
+* 字节型：java序列化机制
+
+本文重点讲解java的序列化机制
 ### serialization的使用
 本节介绍如何使用java原生的序列化工具，代码如下：
 
@@ -46,7 +52,7 @@ public class Person implements Serializable {
 
 }
 ```
-main函数有具体的使用方法，就不详细讲解了。
+main函数有具体的使用方法，通过ObjectOutputStream和ObjectInputStream就可以实现序列化和反序列化，使用方法也比较简单，就不详细讲解了。
 
 ### 注意事项
 
