@@ -135,4 +135,47 @@ private static Long getDeclaredSUID(Class<?> cl) {
 * jvm计算serialVersionUID方法，可以查看ObejctStreamClass#computeDefaultSUID方法
 * 子类和父类都需要实现Serializable接口，如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常
 * 类的所有class属性都必须实现Serializable接口
+* enum是实现了Serializable接口的，因此可以进行序列化
+
+```
+public abstract class Enum<E extends Enum<E>>
+        implements Comparable<E>, Serializable {
+
+}
+```
 * 可以通过override writeObject()和readObject()方法自定义序列化的方法
+
+### 实战：ArrayList的实现
+ArrayList是实现了Serializable接口的，因此可以序列化，但是elementData属性是transient修饰的，根据上一节的说明，该字段不会被序列化，但是我们知道elementData是用来存放组数里的数据的，这个字段不进行序列化就应该有问题，同看查看ArrayList的结构，我们可以看到该类实现了writeObject()和readObject()方法，奥秘就在这两个方法里。
+有上面的分析可以知道通过实现writeObject()和readObject()方法，我们可以自定义序列化和反序列化的规则，ArrayList是怎么实现的呢？为什么要进行自定义的序列化和反序列化？
+因为ArrayList是基于数组实现的，而且该数组是有冗余的，当容量达到threshold时会进行扩容，所有ArrayList数组里有部分内容是null，在序列化时不需要保存这部分数据，因此ArrayList自定义实现了writeObject()和readObject()方法，只保存非null的数据。
+
+### 源码分析
+首先分析ObjectOutputStream的代码，构造函数如下：
+```
+public ObjectOutputStream(OutputStream out) throws IOException {
+    verifySubclass();
+    bout = new BlockDataOutputStream(out);
+    handles = new HandleTable(10, (float) 3.00);
+    subs = new ReplaceTable(10, (float) 3.00);
+    enableOverride = false;
+    writeStreamHeader();
+    bout.setBlockDataMode(true);
+    if (extendedDebugInfo) {
+        debugInfoStack = new DebugTraceInfoStack();
+    } else {
+        debugInfoStack = null;
+    }
+}
+```
+BlockDataOutputStream是一个二进制数据流，实现了DataOutput接口，可以把基本类型转换成字节输出到流中；
+
+HandleTable是用来保存具体的需要进行序列化的对象的，是一个简单的hash table，包含三个数组：
+
+* Object[]：保存具体对象
+* spine[]: 保存对象hash值对应的handle值
+* next[]：hash值碰撞之后的handle值链表
+
+ReplaceTable需要进一步研究？
+
+writeStreamHeader()写入序列化字节头，具体可以查看源码
