@@ -29,10 +29,10 @@ This method should only be called by a thread that is the owner of this object's
 
 在线程之间共享对象上加锁
 线程之间共享的对象调用wait(),notify()和notifyAll()
-为什么有这几个要求呢？首先需要获取锁，是因为如果没有锁则会导致多个线程之间产生竞态条件，具体可以查看这边文章Java的wait(), notify()和notifyAll()使用小结；其次需要在循环里调用wait()，因为唤醒动作有可能是误操作，比如消费者生产者模式中，消费队列从空变为不为空和满变为不满，都会调用notifyAll()，但是在条件谓词（查看《java并发编程实战》）为true情况有两个：消费队列为空和消费队列已满。前面的notifyAll()会导致所有的wait set里的线程唤醒，如果条件谓词使用if会产生问题。补充的两个条件是为什么呢？下面继续说。
+为什么有这几个要求呢？首先需要获取锁，是因为如果没有锁则会导致多个线程之间产生竞态条件，具体可以查看这边文章[Java的wait(), notify()和notifyAll()使用小结](http://www.cnblogs.com/techyc/p/3272321.html)；其次需要在循环里调用wait()，因为唤醒动作有可能是误操作，比如消费者生产者模式中，消费队列从空变为不为空和满变为不满，都会调用notifyAll()，但是在条件谓词（查看《java并发编程实战》）为true情况有两个：消费队列为空和消费队列已满。前面的notifyAll()会导致所有的wait set里的线程唤醒，如果条件谓词使用if会产生问题。补充的两个条件是为什么呢？下面继续说。
 
 ### 锁与条件队列
-java线程同步是通过monitor机制来实现的，分为互斥执行和协作。下面贴张图说明一下java monitor的机制（这个图抄的，详细信息见探索 Java 同步机制）
+java线程同步是通过monitor机制来实现的，分为互斥执行和协作。下面贴张图说明一下java monitor的机制（这个图抄的，详细信息见[探索 Java 同步机制](https://www.ibm.com/developerworks/cn/java/j-lo-synchronized/)）
 
 
 尝试获取锁的线程会进入entry set，获取锁就会变成锁的owner，调用wait()之后就会进入到wait set中，notify()唤醒wait set中的线程之后，对象会再次变为owner，如果条件谓词依旧成立则该线程再次进入到wait set，否则线程会继续执行，直到执行结束，释放锁。
@@ -138,14 +138,15 @@ if (millis <= 0) {
 ```
 再看一下notify()，也在objectMonitor.cpp文件中，这里只说一下大概的过程，具体的逻辑自己查看代码。
 跟wait()方法类似，先调用CHECK_OWNER()校验调用该方法之前是否有获取锁，其次从_WaitSet中dequeue一个ObjectWaiter对象，代码如下：
-
+```
 ObjectWaiter * iterator = DequeueWaiter() ;
+```
 余下逻辑的解释待补充
 
 这里只是大概介绍了一下wait()，notify()和notifyAll()三个方法的底层实现，具体的逻辑还需要继续研究。
 
 参考：
 
-* java 中的 wait 和 notify 实现的源码分析
-* 从零单排 Java concurrency, wait & notify
-* 探索 Java 同步机制
+* [java 中的 wait 和 notify 实现的源码分析](http://blog.csdn.net/raintungli/article/details/6532784)
+* [从零单排 Java concurrency, wait & notify](http://regrecall.github.io/2014/06/24/wait-notify/)
+* [探索 Java 同步机制](https://www.ibm.com/developerworks/cn/java/j-lo-synchronized/)
