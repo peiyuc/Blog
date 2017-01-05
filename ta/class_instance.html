@@ -1,6 +1,5 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
   width: 45em;
-  border: 1px solid #ddd;
   outline: 1300px solid #fff;
   margin: 16px auto;
 }
@@ -1181,13 +1180,13 @@ getClassX(CONST_CHAR_HANDLE nameH, int offset, int length)
     NameTypeKey nameTypeKey;
     long        accessFlags; /* Access indicators (public/private etc.) */
     INSTANCE_CLASS ofClass;  /* Backpointer to the class owning the field */
-    union { 
+    union {
         long  offset;        /* for dynamic objects */
         void *staticAddress; /* pointer to static.  */
     } u;
 };
 
-struct fieldTableStruct { 
+struct fieldTableStruct {
     long length;
     struct fieldStruct fields[1];
 };

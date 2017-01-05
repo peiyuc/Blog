@@ -1,6 +1,5 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
   width: 45em;
-  border: 1px solid #ddd;
   outline: 1300px solid #fff;
   margin: 16px auto;
 }
@@ -1021,7 +1020,7 @@ body .markdown-body
 todo: 补一张内存结构图</p>
 <h3 id="pc-register"><a name="user-content-pc-register" href="#pc-register" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>pc register</h3>
 <p>kvm可以同时执行好几个thread，并且在kvm中具有一个pc register指向正在执行的java指令的地址。这个定义在VmCommon/h/interpret.h中<br />
-<pre><code>struct GlobalStateStruct { 
+<pre><code>struct GlobalStateStruct {
     BYTE*         gs_ip; /* Instruction pointer (program counter) */
     cell*         gs_sp; /* Execution stack pointer */
     cell*         gs_lp; /* Local variable pointer */
