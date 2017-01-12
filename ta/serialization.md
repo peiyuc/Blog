@@ -133,7 +133,9 @@ private static Long getDeclaredSUID(Class<?> cl) {
 
 * serialVersionUID需要声明为private
 * jvm计算serialVersionUID方法，可以查看ObejctStreamClass#computeDefaultSUID方法
-* 子类和父类都需要实现Serializable接口，如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常
+* 子类和父类都需要实现Serializable接口
+  * 如果子类实现，但父类没有实现，父类的属性不会被序列化，且父类必须有一个不带参数的构造函数，否则会抛异常
+  * 如果父类实现，但子类没有实现，子类可以正常序列化，但是此时子类相当于实现了Serializable接口，但是没有声明serialVersionUID，也会有问题
 * 类的所有class属性都必须实现Serializable接口
 * enum是实现了Serializable接口的，因此可以进行序列化
 
