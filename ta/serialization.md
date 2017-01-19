@@ -180,6 +180,8 @@ HandleTable是用来保存具体的需要进行序列化的对象的，是一个
 * spine[]: 保存对象hash值对应的handle值
 * next[]：hash值碰撞之后的handle值链表
 
-ReplaceTable需要进一步研究？
+ReplaceTable在HandlTable上做的封装，用来表达替换关系，具体如何用后面再说
 
 writeStreamHeader()写入序列化字节头，具体可以查看源码
+
+在写对象的时候会调用java.io.ObjectOutputStream#writeObject，该方法会调用writeObject0()方法
