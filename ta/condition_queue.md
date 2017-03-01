@@ -7,7 +7,9 @@ tags:
 ------
 ### 什么是条件队列？
 
-> A condition queue gets its name because it gives a group of threads-called the wait set-a way to wait for a specific condition to become true. Unlike typical queues in which the elements are data items, the elements of condition queue are the threads waiting for condition.
+{% blockquote %}
+A condition queue gets its name because it gives a group of threads-called the wait set-a way to wait for a specific condition to become true. Unlike typical queues in which the elements are data items, the elements of condition queue are the threads waiting for condition.
+{% endblockquote %}
 
 这是[java并发编程实战](https://book.douban.com/subject/10484692/)里的解释，wait set是什么？感觉没怎么说清楚。另一种解释是说条件队列可以协同不同线程之间的工作（太抽象）。条件队列的定义暂且放下，先了解一下如何使用。
 
