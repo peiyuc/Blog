@@ -1,6 +1,8 @@
-
-### kvm系列之三：运行时的数据结构
-peiyuc at 2016-12-20
+---
+title: kvm系列之三：运行时的数据结构
+date: 2017-03-01 14:15:41
+tags:
+---
 
 ------
 kvm在执行Java程序时会定义很多的runtime data areas，其中有些是data areas是线程共享的，也有些是线程私有的。下面讲介绍kvm在运行时用到的各个data area.

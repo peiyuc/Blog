@@ -1,5 +1,8 @@
-### java serialization
-peiyuc 2017-01-04 happy new year!
+---
+title: java serialization
+date: 2017-03-01 14:15:41
+tags:
+---
 
 ------
 序列化是一种约定，大约有两种类型：
